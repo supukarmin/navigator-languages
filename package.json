@@ -1,0 +1,43 @@
+{
+  "name": "navigator-languages",
+  "version": "1.0.0",
+  "description": "Retrieves the language information saved in window.navigator in a backwards compatible way. (navigator.language and navigator.languages)",
+  "main": "lib/index.js",
+  "author": "Armin Šupuk",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/supukarmin/navigator-languages.git"
+  },
+  "keywords": [
+    "navigator",
+    "window.navigator",
+    "window",
+    "language",
+    "languages",
+    "polyfill",
+    "polyfills",
+    "navigator.languages",
+    "navigator.language",
+    "navigator.browserLanguage",
+    "navigator.userLanguage",
+    "navigator.systemLanguage",
+    "ie-polyfill",
+    "ie"
+  ],
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "format-bcp-47": "^1.0.0"
+  }
+}
