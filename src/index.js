@@ -1,41 +1,13 @@
-const formatBcp47 = require('format-bcp-47');
-
-module.exports = () => {
-  if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
-    return getLanguageTags();
+module.exports = function() {
+  if (typeof navigator === 'object') {
+    var n = navigator;
+    var t = 'anguage';
+    var l = 'l' + t + 's';
+    if (n[l]) return n[l];
+    var o = ['l'+t, 'browserL'+t, 'userL'+t, 'systemL'+t];
+    for (var i = 0; i < 4; i++) {
+      if (n[o[i]]) return [ n[o[i]] ];
+    }
   }
   return null;
-};
-
-const getLanguageTags = () => {
-  let languages = null;
-  if (navigator.languages) {
-    languages = navigator.languages;
-  } else if (navigator.language) {
-    languages = [ navigator.language ];
-  } else if (navigator.browserLanguage) {
-    languages = [ navigator.browserLanguage ];
-  } else if (navigator.userLanguage) {
-    languages = [ navigator.userLanguage ];
-  } else if (navigator.systemLanguage) {
-    languages = [ navigator.systemLanguage ];
-  }
-  if (languages !== null) {
-    languages = formatLanguages(languages);
-    if (!languages.length) {
-      languages = null;
-    }
-  }
-  return languages;
-};
-
-const formatLanguages = (languageTags) => {
-  const validAndFormattedTags = [];
-  for (let i = 0; i < languageTags.length; i++) {
-    const formattedTag = formatBcp47(languageTags[i]);
-    if (formattedTag) {
-      validAndFormattedTags.push(formattedTag);
-    }
-  }
-  return validAndFormattedTags;
 };
