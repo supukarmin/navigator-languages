@@ -1,6 +1,6 @@
 # navigator-languages
 
-Retrieves the language information saved in window.navigator in a backwards compatible way. (retrieves an object which works like navigator.language and navigator.languages)
+Retrieves the language information saved in window.navigator in a backwards compatible way. (retrieves an array which works like `navigator.languages`)
 
 # Install
 ```
@@ -9,14 +9,8 @@ npm i navigator-languages
 
 # Usage
 ```js
-//default options:
-{
-  debug: process.env.NODE_ENV === 'development',
-}
-```
-```js
-const navigatorLanguage = require('navigator-languages');
-console.log(navigatorLanguage());
+const navigatorLanguages = require('navigator-languages');
+console.log(navigatorLanguages());
 /* CONSOLE:
 ["de-DE", "en-US", "nl"]
 */

@@ -27,7 +27,7 @@ const config = {
     ]
   },
   plugins: [
-    new UglifyJsPlugin(),
+    //new UglifyJsPlugin(),
   ],
 };
 
