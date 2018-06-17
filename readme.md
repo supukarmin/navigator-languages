@@ -16,6 +16,8 @@ console.log(navigatorLanguages());
 */
 ```
 
+If the browser is really old and there is no chance to get any information, you'll get `undefined`.
+
 # Why is this needed
 * IE 6 & 7 & 8: Only .systemLanguage, .userLanguage (.language & .languages missing)
 * IE 9 & 10: Only .systemLanguage, .userLanguage, .browserLanguage (.language & .languages missing)
@@ -33,13 +35,13 @@ var getNavigatorLanguages = function() {
     f = n['l' + t + 's'];
     return f && f.length ? f : (t = n['l' + t] ||
       n['browserL' + t] ||
-      n['userL' + t]) && !t.push ? [ t ] : t;
+      n['userL' + t]) ? [ t ] : t;
   }
 };
 ```
 Minified: (about 180 bytes)
 ```js
-var getNavigatorLanguages=function(){if('object'==typeof navigator){var c,a='anguage',b=navigator;return c=b['l'+a+'s'],c&&c.length?c:(a=b['l'+a]||b['browserL'+a]||b['userL'+a])&&!a.push?[a]:a}};
+var getNavigatorLanguages=function(){if('object'==typeof navigator){var c,a='anguage',b=navigator;return c=b['l'+a+'s'],c&&c.length?c:(a=b['l'+a]||b['browserL'+a]||b['userL'+a])?[a]:a}};
 ```
 
 The umd module is about 370 bytes.

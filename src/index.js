@@ -4,6 +4,6 @@ module.exports = function() {
     f = n['l' + t + 's'];
     return f && f.length ? f : (t = n['l' + t] ||
       n['browserL' + t] ||
-      n['userL' + t]) && !t.push ? [ t ] : t;
+      n['userL' + t]) ? [ t ] : t;
   }
 };
