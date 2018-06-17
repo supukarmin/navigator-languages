@@ -1,6 +1,6 @@
 {
   "name": "navigator-languages",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Retrieves the language information saved in window.navigator.languages in a backwards compatible way.",
   "main": "dist/index.js",
   "author": "Armin Šupuk",

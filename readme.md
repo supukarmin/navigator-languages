@@ -17,37 +17,40 @@ console.log(navigatorLanguages());
 ```
 
 # Why is this needed
-* IE 9 & IE 10: .language & .languages isn't supported, instead: .userLanguage, .browserLanguage, .systemLanguage
-* IE 11 & Safri 8: doesn't support .languages
+* IE 6 & 7 & 8: Only .systemLanguage, .userLanguage (.language & .languages missing)
+* IE 9 & 10: Only .systemLanguage, .userLanguage, .browserLanguage (.language & .languages missing)
+* IE 11 & Safri 8 & HTC One M8 & Google Nexus 5, etc.: doesn't support .languages, only .language
 * In some Chrome versions: .languages[0] !== .language (.language doesn't support the country and probably the other additional BCP 47 Language Tag information)
 
 There are probably many more issues like that.
 
 # The Code
-(about 350 bytes)
+(about 260 bytes)
 ```js
 var getNavigatorLanguages = function() {
   if (typeof navigator === 'object') {
-    var n = navigator;
-    var t = 'anguage';
-    var l = 'l' + t + 's';
-    if (n[l]) return n[l];
-    var o = ['l'+t, 'browserL'+t, 'userL'+t, 'systemL'+t];
-    for (var i = 0; i < 4; i++) {
-      if (n[o[i]]) return [ n[o[i]] ];
-    }
+    var t = 'anguage', n = navigator, f;
+    f = n['l' + t + 's'];
+    return f && f.length ? f : (t = n['l' + t] ||
+      n['browserL' + t] ||
+      n['userL' + t]) && !t.push ? [ t ] : t;
   }
-  return null;
 };
 ```
-Minified: (about 200-250 bytes)
+Minified: (about 180 bytes)
 ```js
-var getNavigatorLanguages=function(){if('object'==typeof navigator){var a=navigator,b='anguage',c='l'+b+'s';if(a[c])return a[c];for(var d=['l'+b,'browserL'+b,'userL'+b,'systemL'+b],e=0;4>e;e++)if(a[d[e]])return[a[d[e]]]}return null};
+var getNavigatorLanguages=function(){if('object'==typeof navigator){var c,a='anguage',b=navigator;return c=b['l'+a+'s'],c&&c.length?c:(a=b['l'+a]||b['browserL'+a]||b['userL'+a])&&!a.push?[a]:a}};
 ```
 
-The umd module is about 400 bytes.
+The umd module is about 370 bytes.
 
 # How does it work?
-It checks for different entries in `window.navigator` (especially the IE ones).
+It checks for different entries in `window.navigator`, in this order:
+* `.languages` (if ! empty array)
+* `.language`
+* `.browserLanguage`
+* `.userLanguage`
+
+`.systemLanguage` is being ignored, because `.userLanguage` is always available, when also `.systemLanguage` is available and `.userLanguage` is definitely the better choice.
 
 v1.0.0 did also some lowercase/uppercase formatting & validating, which was removed in version 2, because it's normally not needed. Use the [format-bcp-47](https://github.com/supukarmin/format-bcp-47) package, if you need to ensure client-side / server-side consistency

@@ -1,13 +1,9 @@
 module.exports = function() {
   if (typeof navigator === 'object') {
-    var n = navigator;
-    var t = 'anguage';
-    var l = 'l' + t + 's';
-    if (n[l]) return n[l];
-    var o = ['l'+t, 'browserL'+t, 'userL'+t, 'systemL'+t];
-    for (var i = 0; i < 4; i++) {
-      if (n[o[i]]) return [ n[o[i]] ];
-    }
+    var t = 'anguage', n = navigator, f;
+    f = n['l' + t + 's'];
+    return f && f.length ? f : (t = n['l' + t] ||
+      n['browserL' + t] ||
+      n['userL' + t]) && !t.push ? [ t ] : t;
   }
-  return null;
 };
