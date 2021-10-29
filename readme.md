@@ -21,7 +21,7 @@ If the browser is really old and there is no chance to get any information, you'
 # Why is this needed
 * IE 6 & 7 & 8: Only .systemLanguage, .userLanguage (.language & .languages missing)
 * IE 9 & 10: Only .systemLanguage, .userLanguage, .browserLanguage (.language & .languages missing)
-* IE 11 & Safri 8 & HTC One M8 & Google Nexus 5, etc.: doesn't support .languages, only .language
+* IE 11 & Safari 8 & HTC One M8 & Google Nexus 5, etc.: doesn't support .languages, only .language
 * In some Chrome versions: .languages[0] !== .language (.language doesn't support the country and probably the other additional BCP 47 Language Tag information)
 
 There are probably many more issues like that.
